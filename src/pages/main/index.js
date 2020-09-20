@@ -31,7 +31,7 @@ const Genres = ({ value }) => {
     if (Array.isArray(value)) {
         return (
             <LeftContent>
-                {(value.map(gen => <Badge label={gen} variant="lightest" />))}
+                {(value.map(gen => <Badge key={gen} label={gen} variant="lightest" />))}
             </LeftContent>
         )
     }
@@ -58,13 +58,41 @@ const Date = ({ value }) =>(
 
 const Text = ({ value }) => <LeftText>{value}</LeftText>;
 
+const boldStyles = {
+    fontWeight: 800,
+}
+
+function getNormalizedData(data) {
+    return data.map((row, index) => {
+        const higligthed = row.highlights.reduce((acc, value) => {
+            const { path, texts } =  value;
+            return {
+                ...acc,
+                [path]: <span>{texts.map((string, index) => {
+                    const key = `row-${index}`;
+                    if (string.type === 'hit') {
+                        return <b style={boldStyles} key={key}>{string.value}</b>;
+                    }
+                    return string.value;
+                })}</span>
+            }
+        }, {});
+        const key = `row-${index}`;
+        return {
+            ...row,
+            ...higligthed,
+            key,
+        }
+    });
+}
+
 
 const Home = () => {
     const [data, setData] = useState([]);
     const onQueryChange = async (event) => {
         const query = event.target.value;
         const data = await fetchMovies(query);
-        setData(data);
+        setData(getNormalizedData(data));
     };
     return (
         <Container>
@@ -83,7 +111,7 @@ const Home = () => {
                     />
                 </SearchContainer>
                 <RenderIf isTrue={data.length > 0}>
-                    <MoviesTable data={data} keyField="id" variant="listview">
+                    <MoviesTable data={data} keyField="key" variant="listview">
                         <Column header="Title" field="title" component={Text} />
                         <Column header="Released" field="released" component={Date} width={140} />
                         <Column header="Genre" field="genres" component={Genres} />
