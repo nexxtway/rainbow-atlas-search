@@ -24,6 +24,7 @@ export const TopContent = styled.div`
 export const SearchContainer = styled.div`
     width: 80%;
     align-self: center;
+    margin-top: 32px;
 `;
 
 export const SearchInput = styled(Input)`
