@@ -1,5 +1,5 @@
-import React from 'react';
-import { Column } from 'react-rainbow-components';
+import React, { useState } from 'react';
+import { Column, RenderIf } from 'react-rainbow-components';
 import Header from '../../experiences/header';
 import Footer from '../../experiences/footer';
 import {
@@ -10,35 +10,15 @@ import {
     TopContent,
     MoviesTable,
 } from './styled';
-
-const data = [
-    {
-        title: 'Harry Potter and the Philosopher Stone',
-        description: 'Lorem Impsu dolor site lorem impsu dolor …',
-        genre: 'Fantasy',
-        id: '1234567890'
-    },
-    {
-        title: 'Harry Potter and the Chamber of Secrets',
-        description: 'Lorem Impsu dolor site lorem impsu dolor …',
-        genre: 'Fantasy',
-        id: '1234567891'
-    },
-    {
-        title: 'Harry Potter and the Prisoner of Azkaban',
-        description: 'Lorem Impsu dolor site lorem impsu dolor …',
-        genre: 'Fantasy',
-        id: '1234567892'
-    },
-    {
-        title: 'Harry Potter and the Goblet of Fire',
-        description: 'Lorem Impsu dolor site lorem impsu dolor …',
-        genre: 'Fantasy',
-        id: '1234567893'
-    },
-];
+import fetchMovies from './fetchMovies';
 
 const Home = () => {
+    const [data, setData] = useState([]);
+    const onQueryChange = async (event) => {
+        const query = event.target.value;
+        const data = await fetchMovies(query);
+        setData(data);
+    };
     return (
         <Container>
             <TopContent>
@@ -47,13 +27,17 @@ const Home = () => {
                     <Label>Find Movies</Label>
                     <SearchInput
                         label="Access 23 000 Movies on MongoAtlas search"
-                        variant="shaded" />
+                        variant="shaded"
+                        onChange={onQueryChange}
+                    />
                 </SearchContainer>
-                <MoviesTable data={data} keyField="id" variant="listview">
-                    <Column header="Title" field="title"/>
-                    <Column header="Genre" field="genre"/>
-                    <Column header="Description" field="description"/>
-                </MoviesTable>
+                <RenderIf isTrue={data.length > 0}>
+                    <MoviesTable data={data} keyField="id" variant="listview">
+                        <Column header="Title" field="title"/>
+                        <Column header="Genre" field="genre"/>
+                        <Column header="Plot" field="plot"/>
+                    </MoviesTable>
+                </RenderIf>    
             </TopContent>
             <Footer />
         </Container>
