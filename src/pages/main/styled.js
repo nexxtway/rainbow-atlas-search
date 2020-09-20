@@ -28,7 +28,7 @@ export const Label = styled.h1`
     margin-top: 0;
     transition: all 350ms ease;
     font-family: Montserrat, sans-serif;
-    font-size: 48px;
+    font-size: 40px;
     line-height: 1em;
     font-weight: 400;
     margin-bottom: 24px;
