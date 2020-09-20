@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Column, RenderIf, Badge } from 'react-rainbow-components';
-import { Search } from '@rainbow-modules/icons'
 import Header from '../../experiences/header';
 import Footer from '../../experiences/footer';
 import {
@@ -10,10 +9,13 @@ import {
     SearchInput,
     TopContent,
     MoviesTable,
+    LeftContent,
+    SearchIcon,
 } from './styled';
 import fetchMovies from './fetchMovies';
 
 const CustomBadge = ({ value }) => <Badge label={value} variant="lightest" />;
+const LeftText = ({ value }) => <LeftContent>{value}</LeftContent>;
 
 const Home = () => {
     const [data, setData] = useState([]);
@@ -30,17 +32,18 @@ const Home = () => {
                     <Label>Find Movies</Label>
                     <SearchInput
                         onChange={onQueryChange}
-                        icon={<Search />}
+                        icon={<SearchIcon />}
                         iconPosition="right"
                         label="Access 23 000 movies on Mongo Atlas Search"
                         variant="shaded"
+                        placeholder="Find Movie"
                     />
                 </SearchContainer>
                 <RenderIf isTrue={data.length > 0}>
                     <MoviesTable data={data} keyField="id" variant="listview">
-                        <Column header="Title" field="title"/>
-                        <Column header="Genre" field="genre" component={CustomBadge} />
-                        <Column header="Plot" field="plot"/>
+                        <Column header="Title" field="title" component={LeftText} />
+                        <Column header="Genre" field="genre" component={CustomBadge} width={160} />
+                        <Column header="Plot" field="plot" component={LeftText} />
                     </MoviesTable>
                 </RenderIf>
             </TopContent>
