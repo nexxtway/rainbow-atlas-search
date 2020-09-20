@@ -1,0 +1,17 @@
+{
+  "hosting": {
+    "site": "rainbow-atlas-search",
+    "public": "build",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+        {
+            "source": "**",
+            "destination": "/index.html"
+        }
+    ]
+  }
+}
