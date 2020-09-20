@@ -1,11 +1,14 @@
 import styled from 'styled-components';
 import { Input, Table } from 'react-rainbow-components';
+import { Search } from '@rainbow-modules/icons'
 
 export const Container = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     height: 100vh;
+    box-sizing: border-box;
+    overflow: auto;
     background: #F4F6F9;
 `;
 
@@ -13,15 +16,28 @@ export const TopContent = styled.div`
     width: 100%;
     display: flex;
     flex-direction: column;
+    height: 100%;
+    box-sizing: border-box;
+    overflow: auto;
 `;
 
 export const SearchContainer = styled.div`
     width: 80%;
     align-self: center;
 `;
+
 export const SearchInput = styled(Input)`
     width: 60%;
-    margin: 0 auto 100px auto;
+    margin: 0 auto 24px auto;
+
+    input {
+        height: 52px;
+        margin-top: 8px;
+    }
+`;
+
+export const SearchIcon = styled(Search)`
+    margin-top: 6px;
 `;
 
 export const Label = styled.h1`
@@ -40,4 +56,14 @@ export const Label = styled.h1`
 export const MoviesTable = styled(Table)`
     width: 80%;
     margin: 0 auto;
+    height: 100%;
+    box-sizing: border-box;
+    overflow: auto;
+`;
+
+export const LeftContent = styled.p`
+    text-align: left;
+    margin: 0 16px;
+    text-overflow: ellipsis;
+    overflow: hidden;
 `;
