@@ -3,7 +3,7 @@ version: 2.1
 defaults: &defaults
     working_directory: ~/repo
     docker:
-        - image: circleci/node:10.16.3-stretch-browsers
+        - image: circleci/node:12.9.1-stretch-browsers
 
 jobs:
     deploy_firebase:
