@@ -26,11 +26,19 @@ export const SearchContainer = styled.div`
     width: 80%;
     align-self: center;
     margin-top: 32px;
+
+    @media (max-width: 650px) {
+        width: 90%;
+    }
 `;
 
 export const SearchInput = styled(Input)`
     width: 60%;
     margin: 0 auto 24px auto;
+
+    @media (max-width: 650px) {
+        width: 100%;
+    }
 
     input {
         height: 52px;
