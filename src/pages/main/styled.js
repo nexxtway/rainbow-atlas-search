@@ -62,9 +62,14 @@ export const MoviesTable = styled(Table)`
     overflow: auto;
 `;
 
-export const LeftContent = styled.p`
+export const LeftText = styled.p`
     text-align: left;
     margin: 0 16px;
     text-overflow: ellipsis;
     overflow: hidden;
+`;
+
+export const LeftContent = styled.div`
+    display: flex;
+    padding: 8px;
 `;
