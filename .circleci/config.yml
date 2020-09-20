@@ -1,0 +1,45 @@
+version: 2.1
+
+defaults: &defaults
+    working_directory: ~/repo
+    docker:
+        - image: circleci/node:10.15
+
+jobs:
+    deploy_firebase:
+        <<: *defaults
+
+        steps:
+            - checkout
+            - restore_cache:
+                  keys:
+                      - v1-dependencies-{{ checksum "yarn.lock" }}
+                      - v1-dependencies-
+            - run:
+                  name: Create .env file
+                  command: |
+                      touch .env;
+                      echo REACT_APP_API_KEY=$REACT_APP_API_KEY >> .env;
+                      echo REACT_APP_AUTH_DOMAIN=$REACT_APP_AUTH_DOMAIN >> .env;
+                      echo REACT_APP_DATABASE_URL=$REACT_APP_DATABASE_URL >> .env;
+                      echo REACT_APP_PROJECT_ID=$REACT_APP_PROJECT_ID >> .env;
+                      echo REACT_APP_STORAGE_BUCKET=$REACT_APP_STORAGE_BUCKET >> .env;
+                      echo REACT_APP_MESSAGING_SENDER_ID=$REACT_APP_MESSAGING_SENDER_ID >> .env;
+                      echo REACT_APP_APP_ID=$REACT_APP_APP_ID >> .env;
+
+            - run: yarn install
+            - run:
+                  name: 'Build Project'
+                  command: 'yarn build'
+            - run:
+                  name: 'Deploy to Firebase Hosting'
+                  command: yarn deploy --token=$FIREBASE_TOKEN
+
+workflows:
+    version: 2
+    build_and_test:
+        jobs:
+            - deploy_firebase:
+                  filters:
+                      branches:
+                          only: master
