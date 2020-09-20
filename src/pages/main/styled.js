@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { Input, Table } from 'react-rainbow-components';
 import { Search } from '@rainbow-modules/icons'
+import MongoDB from '../../components/icons/mongoDB';
 
 export const Container = styled.div`
     display: flex;
@@ -55,11 +56,12 @@ export const Label = styled.h1`
 `;
 
 export const MoviesTable = styled(Table)`
-    width: 80%;
+    width: 90%;
     margin: 0 auto;
     height: 100%;
     box-sizing: border-box;
     overflow: auto;
+    border-bottom: 1px solid ${props => props.theme.rainbow.palette.border.divider};
 `;
 
 export const LeftText = styled.p`
@@ -72,4 +74,23 @@ export const LeftText = styled.p`
 export const LeftContent = styled.div`
     display: flex;
     padding: 8px;
+`;
+
+export const BrandFooter = styled.div`
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    margin-top: 12px;
+`;
+
+export const SearchText = styled.p`
+    font-size: 16px;
+    color: ${props => props.theme.rainbow.palette.text.label};
+    margin-right: 8px;
+    margin-bottom: 4px;
+`;
+
+export const MongoDBLogo = styled(MongoDB)`
+    width: 150px;
+    height: 36px;
 `;
