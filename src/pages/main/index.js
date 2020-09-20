@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Column, RenderIf, Badge } from 'react-rainbow-components';
+import { FormattedDate } from 'react-intl';
 import Header from '../../experiences/header';
 import Footer from '../../experiences/footer';
-import { FormattedDate } from 'react-intl';
 import {
     Container,
     SearchContainer,
@@ -13,6 +13,9 @@ import {
     LeftText,
     SearchIcon,
     LeftContent,
+    BrandFooter,
+    SearchText,
+    MongoDBLogo,
 } from './styled';
 import fetchMovies from './fetchMovies';
 
@@ -73,7 +76,7 @@ const Home = () => {
                         onChange={onQueryChange}
                         icon={<SearchIcon />}
                         iconPosition="right"
-                        label="Access 23 000 movies on Mongo Atlas Search"
+                        label="Access 23 000 movies on MongoDB Atlas Search"
                         variant="shaded"
                         placeholder="Find Movie"
                         type="search"
@@ -88,6 +91,10 @@ const Home = () => {
                         <Column header="Plot" field="plot" component={Text} />
                     </MoviesTable>
                 </RenderIf>
+                <BrandFooter>
+                    <SearchText>Search by</SearchText>
+                    <MongoDBLogo />
+                </BrandFooter>
             </TopContent>
             <Footer />
         </Container>

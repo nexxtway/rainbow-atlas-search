@@ -10,5 +10,5 @@ export const Container = styled.div`
 
 export const Text = styled.p`
     font-size: 14px;
-    color: ${props => props.theme.rainbow.palette.text.disabled};
+    color: ${props => props.theme.rainbow.palette.text.header};
 `;
