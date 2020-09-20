@@ -76,7 +76,7 @@ const Home = () => {
                         onChange={onQueryChange}
                         icon={<SearchIcon />}
                         iconPosition="right"
-                        label="Access 23 000 movies on MongoDB Atlas Search"
+                        label="Access 23 530 movies on MongoDB Atlas Search"
                         variant="shaded"
                         placeholder="Find Movie"
                         type="search"
